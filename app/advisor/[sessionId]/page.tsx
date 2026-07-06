@@ -971,7 +971,7 @@ export default function AdvisorPage() {
             />
             <button
               className={`btn btn-primary ${styles.sendBtn}`}
-              onClick={sendMessage}
+              onClick={() => sendMessage()}
               disabled={!chatInput.trim() || chatLoading}
             >
               <IconSend size={16} />
