@@ -1,0 +1,303 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-base);
+  position: relative;
+}
+
+.bg { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+.orb1 {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(200, 68%, 19%, 0.08) 0%, transparent 70%);
+  filter: blur(100px);
+  top: -200px; left: -100px;
+}
+
+.orb2 {
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsla(210, 80%, 60%, 0.07) 0%, transparent 70%);
+  filter: blur(100px);
+  bottom: -100px; right: -100px;
+}
+
+/* Header */
+.header {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 1rem var(--space-xl);
+  display: flex; align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 100;
+}
+
+.logo {
+  display: flex; align-items: center; gap: var(--space-sm);
+  font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
+  color: var(--text-primary); text-decoration: none;
+}
+
+.logoIcon { color: var(--brand-gold); }
+
+/* Wrapper */
+.wrapper {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 7rem var(--space-xl) var(--space-4xl);
+  position: relative; z-index: 1;
+}
+
+/* Progress */
+.progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: var(--space-2xl);
+  position: relative;
+}
+
+.progressItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  position: relative;
+  flex: 1;
+}
+
+.progressDot {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 2px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  transition: all var(--transition-base);
+  position: relative; z-index: 1;
+  flex-shrink: 0;
+}
+
+.progressActive {
+  border-color: var(--brand-gold);
+  background: hsla(200, 68%, 19%, 0.1);
+  box-shadow: 0 0 20px hsla(200, 68%, 19%, 0.3);
+}
+
+.progressDone {
+  background: var(--gradient-brand);
+  border-color: var(--brand-gold);
+  color: #fff;
+}
+
+.progressLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.progressLabelActive { color: var(--brand-gold); }
+
+.progressLine {
+  position: absolute;
+  top: 28px;
+  left: calc(50% + 28px);
+  right: calc(-50% + 28px);
+  height: 2px;
+  background: var(--glass-border);
+  z-index: 0;
+}
+
+.progressLineDone {
+  background: var(--gradient-brand);
+}
+
+/* Card */
+.card {
+  padding: var(--space-2xl);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step content */
+.stepContent {
+  flex: 1;
+  animation: fadeInUp 0.4s ease;
+}
+
+.stepHeader {
+  margin-bottom: var(--space-xl);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.stepDesc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+/* Chip grid */
+.chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.chip:hover {
+  border-color: var(--brand-gold);
+  color: var(--text-primary);
+  background: hsla(200, 68%, 19%, 0.05);
+}
+
+.chipActive {
+  border-color: var(--brand-gold);
+  background: hsla(200, 68%, 19%, 0.12);
+  color: var(--brand-gold);
+}
+
+.selectedCount {
+  margin-top: var(--space-md);
+  font-size: 0.8rem;
+  color: var(--brand-gold);
+  font-weight: 600;
+}
+
+/* Review */
+.reviewGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.reviewItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: var(--space-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.reviewItemFull {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+}
+
+.reviewLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reviewVal {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.reviewTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* Error */
+.error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1rem;
+  background: hsla(0, 80%, 65%, 0.1);
+  border: 1px solid hsla(0, 80%, 65%, 0.25);
+  border-radius: var(--radius-md);
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-top: var(--space-md);
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .row { grid-template-columns: 1fr; }
+  .reviewGrid { grid-template-columns: 1fr; }
+  .progressLabel { display: none; }
+  .card { padding: var(--space-lg); }
+}
+
+/* ============================================================
+   LOCAL KEYFRAMES (Fix for CSS Modules)
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
