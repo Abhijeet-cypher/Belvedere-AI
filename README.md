@@ -50,8 +50,27 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-## Architecture Notes
+## Architecture Overview
 
-- The app uses a highly modular UI system with custom glassmorphism styling (`glass-card`, CSS variables) for a premium look and feel.
-- AI interactions are heavily optimized to return strict JSON data using complex system prompting.
-- The Admin dashboard allows dynamic prompt engineering, stored directly in Supabase and fetched during generation.
+Belvedere AI is built on a modern, decoupled serverless architecture to ensure high performance, security, and scalability:
+
+- **Client-Side Rendering (CSR) & Server-Side Rendering (SSR)**: The application leverages Next.js App Router for optimal rendering strategies. The dynamic dashboard heavily utilizes React hooks (`useState`, `useEffect`) and Context for state management, while API routes run securely on the edge/server.
+- **Data Persistence Layer**: Supabase acts as the primary data store. User sessions, generated JSON roadmaps, and chat message histories are stored in PostgreSQL tables. Supabase is accessed via its RESTful client SDK, ensuring data integrity and fast retrieval for historical sessions.
+- **AI Orchestration**: The `/api/generate-roadmap` and `/api/chat` endpoints act as orchestration layers. They securely hold the `GEMINI_API_KEY` (preventing frontend leakage), construct complex system prompts (fetched dynamically from the Supabase `config` table), and handle the asynchronous communication with the Google Generative AI models.
+- **Dynamic Prompt System**: Rather than hardcoding system instructions into the source code, the application fetches the core AI persona and instruction sets from the database at runtime. This allows administrators to tweak the AI's behavior via the `/admin` portal without requiring a full application rebuild or redeployment.
+
+## Assumptions
+
+- **Single Tenant / Open Access**: Currently, the application is designed to be accessible without user authentication (no login walls for the main flow) to reduce friction during demonstrations and onboarding. Session IDs (UUIDs) act as secure, unique identifiers for retrieving past data.
+- **LLM Reliability**: The roadmap generation heavily relies on the assumption that the underlying LLM (`gemini-2.5-flash`) will consistently adhere to the strictly defined JSON schema enforced by the system prompts.
+- **Browser Capabilities**: PDF export functionality assumes the user's browser supports HTML5 Canvas (`html2canvas`) rendering for client-side document generation.
+
+## Future Improvements
+
+While fully functional, there are several areas planned for future enhancement:
+
+1. **User Authentication (Auth)**: Implementing Supabase Auth (OAuth / Email) to allow users to have a permanent, authenticated profile where all their business sessions and roadmaps are securely tied to an account rather than local browser state or direct links.
+2. **Streaming Roadmap Generation**: Currently, the initial roadmap generation waits for the entire JSON payload to complete before rendering. Implementing a streaming JSON parser would allow the UI to build out progressively, reducing perceived latency.
+3. **Multi-Model Support**: Abstracting the AI orchestration layer to support falling back to or switching between multiple models (e.g., GPT-4o, Claude 3.5 Sonnet) based on availability or specific task suitability.
+4. **Interactive Action Items**: Allowing users to check off specific action items on their roadmap, tracking their progress over time directly in the dashboard, rather than just viewing a static plan.
+5. **Team Collaboration**: Enabling users to invite team members to view and comment on specific roadmap strategies within the platform.
