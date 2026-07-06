@@ -363,7 +363,9 @@ async function exportPDF(session: BusinessSession, roadmap: RoadmapData) {
   }
 
   // Footer on every page
-  const pageCount = pdf.getNumberOfPages();
+  const pageCount = (pdf as any).internal?.getNumberOfPages 
+    ? (pdf as any).internal.getNumberOfPages() 
+    : (pdf as any).getNumberOfPages();
   for (let p = 1; p <= pageCount; p++) {
     pdf.setPage(p);
     pdf.setTextColor(160, 180, 190);
